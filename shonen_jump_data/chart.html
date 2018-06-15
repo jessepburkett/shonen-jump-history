@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+	    var allText =[];
+	    var allTextLines = [];
+	    var Lines = [];
+
+	    var txtFile = new XMLHttpRequest();
+	    txtFile.open("GET", "file://Users/jesseburkett/shonen_jump_data/60s/\'69-\'69.csv", true);
+	    txtFile.onreadystatechange = function()
+	    {
+	        allText = txtFile.responseText;
+	        allTextLines = allText.split(/\r\n|\n/);
+	    };
+
+	    document.write(allTextLines);
+	    document.write(allText);
+	    document.write(txtFile);
+	</script>
+    <script type="text/javascript">
+      $.get({
+ 		url:'60s/\'69-\'69.csv',
+ 		data:{},
+ 		success:function(evt){console.log(evt);}
+	  });
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+        dataTable.addColumn({ type: 'string', id: 'President' });
+        dataTable.addColumn({ type: 'number', id: 'Start' });
+        dataTable.addColumn({ type: 'number', id: 'End' });
+        dataTable.addRows([
+          [ 'Washington', 1968.1, 1969.52 ]]);
+
+        chart.draw(dataTable);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="timeline" style="height: 180px;"></div>
+  </body>
+</html>
